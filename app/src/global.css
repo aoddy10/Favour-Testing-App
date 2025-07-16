@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Define CSS Variables for consistent theming */
+:root {
+  --color-primary: #1D4ED8; /* Tailwind blue-700 */
+  --color-secondary: #9333EA; /* Tailwind purple-600 */
+  --color-background: #F9FAFB; /* Tailwind gray-50 */
+  --color-text: #111827; /* Tailwind gray-900 */
+}
+
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* Custom utility for consistent horizontal padding */
+.container-padding {
+  padding-left: 1rem; /* 16px */
+  padding-right: 1rem; /* 16px */
+}
