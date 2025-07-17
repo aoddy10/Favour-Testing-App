@@ -18,13 +18,13 @@ export default function Button({
     className,
     ...rest
 }: ButtonProps) {
-    const baseStyle = "rounded-full font-sm";
+    const baseStyle = "rounded-full text-sm";
 
     const variantStyles: Record<Variant, string> = {
         primary: "bg-primary text-white hover:bg-primary/90",
         secondary: "bg-secondary text-white hover:bg-secondary/90",
         outline:
-            "border border-primary text-primary bg-transparent hover:bg-primary/10",
+            "border border-secondary text-secondary bg-transparent hover:bg-secondary/10",
         transparent: "bg-transparent hover:bg-primary/10",
     };
 
