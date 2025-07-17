@@ -1,10 +1,55 @@
 import { useState } from "react";
+import type { RecipeCardProps } from "@/types/recipe";
 
 // import components
 import SearchBox from "@/components/SearchBox";
 import Button from "@/components/ui/Button";
+import YourFavoriteSection from "@/components/YourFavoriteSection";
 
 type ListTypeProps = "Quick Pick" | "All Recipes";
+
+// test data
+const favoriteRecipes: RecipeCardProps[] = [
+    {
+        recipe: {
+            id: "1",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+        },
+        inShop: false,
+    },
+    {
+        recipe: {
+            id: "2",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+        },
+        inShop: true,
+    },
+    {
+        recipe: {
+            id: "3",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+        },
+        inShop: true,
+    },
+];
 
 function PlanPage() {
     const [selected, setSelected] = useState<ListTypeProps>("Quick Pick");
@@ -38,6 +83,7 @@ function PlanPage() {
                 </Button>
             </div>
 
+            {/* Search box and more button */}
             <div className="flex gap-3">
                 <div className="flex-1">
                     <SearchBox
@@ -50,6 +96,8 @@ function PlanPage() {
                     More +
                 </Button>
             </div>
+
+            <YourFavoriteSection recipes={favoriteRecipes} />
         </div>
     );
 }
