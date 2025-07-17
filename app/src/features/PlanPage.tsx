@@ -6,6 +6,7 @@ import SearchBox from "@/components/SearchBox";
 import Button from "@/components/ui/Button";
 import YourFavoriteSection from "@/components/YourFavoriteSection";
 import RecipesSection from "@/components/RecipesSection";
+import ModernProperSection from "@/components/ModernProperSection";
 
 type ListTypeProps = "Quick Pick" | "All Recipes";
 
@@ -53,6 +54,48 @@ const favoriteRecipes: RecipeCardProps[] = [
 ];
 
 const recipes: RecipeCardProps[] = [
+    {
+        recipe: {
+            id: "1",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+        },
+        inShop: false,
+    },
+    {
+        recipe: {
+            id: "2",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+        },
+        inShop: false,
+    },
+    {
+        recipe: {
+            id: "3",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+        },
+        inShop: false,
+    },
+];
+
+const modernProperRecipes: RecipeCardProps[] = [
     {
         recipe: {
             id: "1",
@@ -142,7 +185,9 @@ function PlanPage() {
 
             <YourFavoriteSection recipes={favoriteRecipes} />
 
-            <RecipesSection recipes={favoriteRecipes} />
+            <RecipesSection recipes={recipes} />
+
+            <ModernProperSection recipes={modernProperRecipes} />
         </div>
     );
 }

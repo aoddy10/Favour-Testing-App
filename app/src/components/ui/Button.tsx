@@ -18,7 +18,7 @@ export default function Button({
     className,
     ...rest
 }: ButtonProps) {
-    const baseStyle = "rounded-full text-sm";
+    const baseStyle = "rounded-full text-md";
 
     const variantStyles: Record<Variant, string> = {
         primary: "bg-primary text-white hover:bg-primary/90",
@@ -29,7 +29,7 @@ export default function Button({
     };
 
     const sizeStyles: Record<Size, string> = {
-        sm: "px-3 py-1 text-sm",
+        sm: "px-3 py-1 text-xs",
         md: "px-4 py-2 text-base",
         lg: "px-5 py-3 text-lg",
     };
