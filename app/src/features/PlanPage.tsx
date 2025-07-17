@@ -1,5 +1,18 @@
+import { useEffect } from "react";
+import {
+    recipes,
+    favoriteRecipes,
+    modernProperRecipes,
+    selectedModernProperUser,
+} from "@/libs/mockData";
+import { useAppDispatch } from "@/store/hooks";
+import {
+    setRecipes,
+    setFavoriteRecipes,
+    setModernProperRecipes,
+    setSelectedModernProperUser,
+} from "@/store/recipeSlice";
 import { useState } from "react";
-import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 
 // import components
 import SearchBox from "@/components/SearchBox";
@@ -10,136 +23,18 @@ import ModernProperSection from "@/components/ModernProperSection";
 
 type ListTypeProps = "Quick Pick" | "All Recipes";
 
-// test data
-const favoriteRecipes: RecipeCardProps[] = [
-    {
-        recipe: {
-            id: "1",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
-            id: "2",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: true,
-    },
-    {
-        recipe: {
-            id: "3",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: true,
-    },
-];
-
-const recipes: RecipeCardProps[] = [
-    {
-        recipe: {
-            id: "1",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
-            id: "2",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
-            id: "3",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-];
-
-const modernProperRecipes: RecipeCardProps[] = [
-    {
-        recipe: {
-            id: "1",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
-            id: "2",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
-            id: "3",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-        },
-        inShop: false,
-    },
-];
-
 function PlanPage() {
     const [selected, setSelected] = useState<ListTypeProps>("Quick Pick");
     const [searchText, setSearchText] = useState("");
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(setRecipes(recipes));
+        dispatch(setFavoriteRecipes(favoriteRecipes));
+        dispatch(setModernProperRecipes(modernProperRecipes));
+        dispatch(setSelectedModernProperUser(selectedModernProperUser));
+    }, [dispatch]);
 
     return (
         <div className="flex  flex-col gap-4">
@@ -183,11 +78,11 @@ function PlanPage() {
                 </Button>
             </div>
 
-            <YourFavoriteSection recipes={favoriteRecipes} />
+            <YourFavoriteSection />
 
-            <RecipesSection recipes={recipes} />
+            <RecipesSection />
 
-            <ModernProperSection recipes={modernProperRecipes} />
+            <ModernProperSection />
         </div>
     );
 }

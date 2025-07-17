@@ -12,3 +12,8 @@ export type RecipeCard = {
     recipe: Recipe;
     inShop: boolean;
 };
+
+export type SelectedModernProper = {
+    id: string;
+    avatarUrl: string;
+};
