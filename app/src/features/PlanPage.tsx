@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RecipeCardProps } from "@/types/recipe";
+import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 
 // import components
 import SearchBox from "@/components/SearchBox";

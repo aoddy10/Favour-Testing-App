@@ -1,4 +1,4 @@
-export type RecipeProps = {
+export type Recipe = {
     id: string;
     title: string;
     image: string;
@@ -8,7 +8,7 @@ export type RecipeProps = {
     price: number;
 };
 
-export type RecipeCardProps = {
-    recipe: RecipeProps;
+export type RecipeCard = {
+    recipe: Recipe;
     inShop: boolean;
 };

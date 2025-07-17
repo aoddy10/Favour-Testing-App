@@ -1,10 +1,10 @@
-import type { RecipeCardProps } from "@/types/recipe";
+import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
 import { Heart, Clock4, UserRound } from "lucide-react";
 
 export default function RecipeCard(cardDetail: RecipeCardProps) {
     return (
-        <div className="bg-white rounded-xl p-2 space-y-2 min-w-56 shadow-md">
+        <div className="bg-white rounded-xl p-2 space-y-2 min-w-56 shadow-md shadow-gray-400">
             <div>
                 <div className="relative">
                     <img
@@ -29,27 +29,29 @@ export default function RecipeCard(cardDetail: RecipeCardProps) {
                 </div>
             </div>
 
-            <h2 className="text-lg font-semibold text-gray-400">
-                {cardDetail.recipe.title}
-            </h2>
+            <div className="flex flex-col gap-2 px-2">
+                <h2 className="text-lg font-semibold text-gray-400">
+                    {cardDetail.recipe.title}
+                </h2>
 
-            <div className="flex justify-evenly text-gray-500 text-sm">
-                <div className="flex items-center justify-start w-full gap-2">
-                    <Clock4 /> {cardDetail.recipe.duration}m
+                <div className="flex justify-evenly text-gray-500 text-sm">
+                    <div className="flex items-center justify-start w-full gap-2">
+                        <Clock4 /> {cardDetail.recipe.duration}m
+                    </div>
+
+                    <span className="flex items-center justify-start w-full gap-2">
+                        <UserRound /> ${cardDetail.recipe.price}
+                    </span>
                 </div>
 
-                <span className="flex items-center justify-start w-full gap-2">
-                    <UserRound /> ${cardDetail.recipe.price}
-                </span>
-            </div>
-
-            <div className="flex px-4">
-                <Button
-                    variant={cardDetail.inShop ? "secondary" : "outline"}
-                    className="w-full"
-                >
-                    {cardDetail.inShop ? "Remove" : "Add To List"}
-                </Button>
+                <div className="flex px-4">
+                    <Button
+                        variant={cardDetail.inShop ? "secondary" : "outline"}
+                        className="w-full"
+                    >
+                        {cardDetail.inShop ? "Remove" : "Add To List"}
+                    </Button>
+                </div>
             </div>
         </div>
     );
