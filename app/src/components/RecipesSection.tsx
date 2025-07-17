@@ -1,11 +1,11 @@
 import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import RecipeCard from "@/components/RecipeCard";
 
-function YourFavoriteSection({ recipes }: { recipes: RecipeCardProps[] }) {
+function RecipesSection({ recipes }: { recipes: RecipeCardProps[] }) {
     return (
         <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
-                <div className=" font-bold">Your Favorite</div>
+                <div className=" font-bold">Recipes</div>
                 <div className=" text-sm text-secondary font-semibold cursor-pointer">
                     View All
                 </div>
@@ -30,4 +30,4 @@ function YourFavoriteSection({ recipes }: { recipes: RecipeCardProps[] }) {
     );
 }
 
-export default YourFavoriteSection;
+export default RecipesSection;
