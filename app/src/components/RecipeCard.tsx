@@ -1,10 +1,24 @@
+import { useAppDispatch } from "@/store/hooks";
+import { setSelectedRecipe } from "@/store/recipeSlice";
+import { useNavigate } from "react-router-dom";
 import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
 import { Heart, Clock4, UserRound } from "lucide-react";
 
 export default function RecipeCard(cardDetail: RecipeCardProps) {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const handleCardClick = () => {
+        dispatch(setSelectedRecipe(cardDetail));
+        navigate("/recipe");
+    };
+
     return (
-        <div className="bg-white rounded-xl p-2 space-y-2 min-w-38 shadow-md shadow-gray-300 shadow-offset">
+        <div
+            className="bg-white rounded-xl p-2 space-y-2 min-w-38 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
+            onClick={handleCardClick}
+        >
             <div>
                 <div className="relative">
                     <img

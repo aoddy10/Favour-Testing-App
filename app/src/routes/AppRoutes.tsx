@@ -10,6 +10,7 @@ import ListPage from "@/features/ListPage";
 import NotFoundPage from "@/features/NotFoundPage";
 import PlanPage from "@/features/PlanPage";
 import ShopPage from "@/features/ShopPage";
+import Recipe from "@/features/Recipe";
 
 export default function AppRoutes() {
     return (
@@ -21,6 +22,7 @@ export default function AppRoutes() {
                     <Route path="/shop" element={<ShopPage />} />
                     <Route path="/cook" element={<CookPage />} />
                     <Route path="/account" element={<AccountPage />} />
+                    <Route path="/recipe" element={<Recipe />} />
                     <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>

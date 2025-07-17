@@ -12,6 +12,7 @@ interface RecipeState {
     favoriteRecipes: RecipeCard[];
     modernProperRecipes: RecipeCard[];
     selectedModernProperUser?: SelectedModernProper;
+    selectedRecipe?: RecipeCard;
 }
 
 const initialState: RecipeState = {
@@ -112,6 +113,11 @@ const recipeSlice = createSlice({
         ) {
             state.selectedModernProperUser = action.payload;
         },
+
+        // Set the selected recipe for viewing details.
+        setSelectedRecipe(state, action: PayloadAction<RecipeCard>) {
+            state.selectedRecipe = action.payload;
+        },
     },
 });
 
@@ -129,6 +135,7 @@ export const {
     removeModernProperRecipe,
     updateModernProperRecipe,
     setSelectedModernProperUser,
+    setSelectedRecipe,
 } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

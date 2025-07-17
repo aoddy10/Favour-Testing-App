@@ -4,8 +4,11 @@ export type Recipe = {
     image: string;
     listName: string;
     ownerAvatar: string;
+    prepTime: number; // in minutes
     duration: number; // in minutes
     price: number;
+    features: string[];
+    costPerServing: number;
 };
 
 export type RecipeCard = {
