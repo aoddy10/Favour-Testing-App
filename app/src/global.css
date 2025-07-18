@@ -1,21 +1,25 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* import font */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+@import "tailwindcss";
 
 /* Define CSS Variables for consistent theming */
 :root {
   --color-primary: #1D4ED8; /* Tailwind blue-700 */
-  --color-secondary: #9333EA; /* Tailwind purple-600 */
+  --color-secondary: #9900cc; /* Tailwind purple-600 */
   --color-background: #F9FAFB; /* Tailwind gray-50 */
   --color-text: #111827; /* Tailwind gray-900 */
 }
 
-/* Reset & Base Styles */
+
+
+
+/* Reset & Base Styles
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
 body {
   font-family: 'Inter', sans-serif;
@@ -24,8 +28,54 @@ body {
   line-height: 1.5;
 }
 
+
 /* Custom utility for consistent horizontal padding */
 .container-padding {
   padding-left: 1rem; /* 16px */
   padding-right: 1rem; /* 16px */
+}
+
+/* Custom text and background color utilities */
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-background {
+  color: var(--color-background);
+}
+.text-text {
+  color: var(--color-text);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+.bg-background {
+  background-color: var(--color-background);
+}
+.bg-text {
+  background-color: var(--color-text);
+}
+
+
+/* add the code bellow */
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
 }
