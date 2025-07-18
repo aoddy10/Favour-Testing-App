@@ -1,3 +1,13 @@
+export type ingredient = {
+    id: string;
+    title: string;
+    subtitle: string;
+    description: string;
+    information: string;
+    price: number;
+    imageUrl: string;
+};
+
 export type Recipe = {
     id: string;
     title: string;
@@ -8,7 +18,13 @@ export type Recipe = {
     duration: number; // in minutes
     price: number;
     features: string[];
-    costPerServing: number;
+    ingredients: ingredient[];
+    cookingMethod: string;
+};
+
+export type SelectedModernProper = {
+    id: string;
+    avatarUrl: string;
 };
 
 export type RecipeCard = {
@@ -16,7 +32,7 @@ export type RecipeCard = {
     inShop: boolean;
 };
 
-export type SelectedModernProper = {
-    id: string;
-    avatarUrl: string;
+export type IngredientCard = {
+    detail: ingredient;
+    isSelected?: boolean;
 };
