@@ -13,10 +13,10 @@ export default function RecipeCard({
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    console.log(cardDetail);
-
     const handleCardClick = () => {
+        // set selected recipe to be the selected one in store.
         dispatch(setSelectedRecipe(cardDetail));
+        // navigate to recipe page
         navigate("/recipe");
     };
 

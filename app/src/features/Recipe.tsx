@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/store/hooks";
+import { setSelectedRecipe } from "@/store/recipeSlice";
 import Button from "@/components/ui/Button";
 
 import { ArrowLeft, Heart, Send, Clock4, CookingPot } from "lucide-react";
@@ -21,6 +24,9 @@ function Recipe() {
     const selectedRecipe = useAppSelector(
         (state) => state.recipe.selectedRecipe
     );
+
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const [data, setData] = useState<DataProps>({
         servings: 0,
@@ -93,11 +99,20 @@ function Recipe() {
         });
     };
 
+    const handleBackButtonClick = () => {
+        navigate(-1);
+        setTimeout(() => {
+            dispatch(setSelectedRecipe(null));
+        }, 300);
+    };
+
     return (
         <div className="flex flex-col space-y-4">
             <div className="flex flex-col p-4 space-y-2">
                 <div className="flex items-center justify-between my-4">
-                    <ArrowLeft className="cursor-pointer" />
+                    <button onClick={handleBackButtonClick}>
+                        <ArrowLeft className="cursor-pointer" />
+                    </button>
                     <div className="flex justify-end space-x-4">
                         <Heart className="inline cursor-pointer" />
                         <Send className="inline cursor-pointer" />
