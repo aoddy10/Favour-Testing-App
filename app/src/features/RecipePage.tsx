@@ -18,6 +18,7 @@ type DataProps = {
 };
 
 function Recipe() {
+    // State to track the selected tab: "Ingredients" or "Method"
     const [selectedTab, setSelectedTab] =
         useState<SelectedTabProps>("Ingredients");
 
@@ -28,13 +29,14 @@ function Recipe() {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    // State to manage servings, total amount, and cost per serving
     const [data, setData] = useState<DataProps>({
         servings: 0,
         totalAmount: 0,
         costPerServing: 0,
     });
 
-    // Initialize totalAmount and costPerServing based on selectedRecipe ingredients
+    // Initialize total amount and cost per serving based on selected recipe's ingredients
     useEffect(() => {
         const initialTotalAmount =
             selectedRecipe?.recipe.ingredients?.reduce(
@@ -58,7 +60,7 @@ function Recipe() {
         })) || []
     );
 
-    // Toggle selection of an ingredient and recalculate costs
+    // Toggle selection of an ingredient by index and recalculate costs
     const handleToggleSelected = (index: number) => {
         setIngredientCards((prevCards) => {
             const updatedCards = prevCards.map((card, i) =>
@@ -72,7 +74,7 @@ function Recipe() {
         });
     };
 
-    // Recalculate totalAmount and costPerServing based on selected ingredients
+    // Recalculate the total amount and cost per serving based on selected ingredients
     const recalculateCosts = (cards?: IngredientCardProps[]) => {
         const currentCards = cards || ingredientCards;
         const total = currentCards
@@ -85,7 +87,7 @@ function Recipe() {
         }));
     };
 
-    // Handler to toggle like status of the recipe
+    // Toggle like status of the current selected recipe
     const handleToggleLike = () => {
         if (selectedRecipe) {
             dispatch(toggleLikeRecipe(selectedRecipe.recipe.id));
@@ -109,116 +111,93 @@ function Recipe() {
         });
     };
 
-    // Navigate back to home path
+    // Navigate back to the home page
     const handleBackButtonClick = () => {
         navigate("/");
     };
 
     return (
-        <div className="flex flex-col space-y-4">
-            <div className="flex flex-col p-4 space-y-2">
-                <div className="flex items-center justify-between my-4">
-                    <button onClick={handleBackButtonClick}>
-                        <ArrowLeft className="cursor-pointer" />
+        <div className="flex flex-col pb-20">
+            {/* Top button section */}
+            <div className="flex items-center justify-between px-4 my-6">
+                <button onClick={handleBackButtonClick}>
+                    <ArrowLeft className="cursor-pointer" />
+                </button>
+                <div className="flex justify-end space-x-4">
+                    <button onClick={handleToggleLike}>
+                        <Heart
+                            className={`inline cursor-pointer ${
+                                selectedRecipe.isLike
+                                    ? "text-black fill-black"
+                                    : "text-gray-300 fill-transparent"
+                            }`}
+                        />
                     </button>
-                    <div className="flex justify-end space-x-4">
-                        <button onClick={handleToggleLike}>
-                            <Heart
-                                className={`inline cursor-pointer ${
-                                    selectedRecipe.isLike
-                                        ? "text-black fill-black"
-                                        : "text-gray-300 fill-transparent"
-                                }`}
-                            />
-                        </button>
-                        <Send className="inline cursor-pointer" />
-                    </div>
-                </div>
-
-                <div>
-                    <div className="relative">
-                        <img
-                            src={selectedRecipe.recipe.image}
-                            alt={selectedRecipe.recipe.title}
-                            className="w-full aspect-square object-cover rounded-2xl"
-                        />
-                    </div>
-
-                    <div className="flex items-end space-x-4 px-4 -mt-12">
-                        <img
-                            src={selectedRecipe.recipe.ownerAvatar}
-                            alt="Owner"
-                            className="w-24 aspect-square rounded-full object-cover border-6 border-white z-50"
-                        />
-                        <span className="text-gray-500 w-full pb-4 text-lg">
-                            {selectedRecipe.recipe.listName}
-                        </span>
-                    </div>
-                </div>
-
-                <h1 className="text-4xl text-purple-900 font-serif">
-                    {selectedRecipe.recipe.title}
-                </h1>
-
-                <div className="flex space-x-8 text-gray-500">
-                    <span className="flex items-center space-x-2">
-                        <CookingPot />{" "}
-                        <span>
-                            Prep{" "}
-                            {selectedRecipe.recipe.duration
-                                ? selectedRecipe.recipe.duration
-                                : "-"}{" "}
-                            mins
-                        </span>
-                    </span>
-                    <span className="flex items-center space-x-2">
-                        <Clock4 />
-                        <span>
-                            Prep{" "}
-                            {selectedRecipe.recipe.duration
-                                ? selectedRecipe.recipe.duration
-                                : "-"}{" "}
-                            mins
-                        </span>
-                    </span>
-                </div>
-
-                <div className="text-gray-500">
-                    {selectedRecipe.recipe.features?.join(" · ")}
+                    <Send className="inline cursor-pointer" />
                 </div>
             </div>
 
-            <div className="flex flex-col space-y-4 p-4 bg-white">
-                {/* ingredients and Method selection */}
-                <div className="flex justify-evenly bg-gray-200 rounded-full">
-                    <Button
-                        variant={
-                            selectedTab === "Ingredients"
-                                ? "secondary"
-                                : "transparent"
-                        }
-                        size="md"
-                        className="w-full"
-                        onClick={() => setSelectedTab("Ingredients")}
-                    >
-                        Ingredients
-                    </Button>
-                    <Button
-                        variant={
-                            selectedTab === "Method"
-                                ? "secondary"
-                                : "transparent"
-                        }
-                        size="md"
-                        className="w-full"
-                        onClick={() => setSelectedTab("Method")}
-                    >
-                        Method
-                    </Button>
+            {/* Image and recipe info section */}
+            <div className="flex flex-col gap-2 sm:flex-row sm:gap-0 sm:pb-4">
+                <div className="px-4">
+                    <div className="w-full sm:w-72">
+                        <div className="relative">
+                            <img
+                                src={selectedRecipe.recipe.image}
+                                alt={selectedRecipe.recipe.title}
+                                className="w-full aspect-square object-cover rounded-2xl"
+                            />
+                        </div>
+
+                        <div className="flex items-end space-x-4 px-4 -mt-12">
+                            <img
+                                src={selectedRecipe.recipe.ownerAvatar}
+                                alt="Owner"
+                                className="w-24 aspect-square rounded-full object-cover border-6 border-white z-50"
+                            />
+                            <span className="text-gray-500 w-full pb-4 text-lg">
+                                {selectedRecipe.recipe.listName}
+                            </span>
+                        </div>
+                    </div>
                 </div>
 
-                {selectedTab === "Ingredients" ? (
-                    <>
+                <div className="">
+                    <div className="flex flex-col gap-2 px-4">
+                        <h1 className="text-4xl text-purple-900 font-serif">
+                            {selectedRecipe.recipe.title}
+                        </h1>
+
+                        <div className="flex space-x-8 text-gray-500">
+                            <span className="flex items-center space-x-2">
+                                <CookingPot />{" "}
+                                <span>
+                                    Prep{" "}
+                                    {selectedRecipe.recipe.duration
+                                        ? selectedRecipe.recipe.duration
+                                        : "-"}{" "}
+                                    mins
+                                </span>
+                            </span>
+                            <span className="flex items-center space-x-2">
+                                <Clock4 />
+                                <span>
+                                    Prep{" "}
+                                    {selectedRecipe.recipe.duration
+                                        ? selectedRecipe.recipe.duration
+                                        : "-"}{" "}
+                                    mins
+                                </span>
+                            </span>
+                        </div>
+
+                        <div className="text-gray-500">
+                            {selectedRecipe.recipe.features?.join(" · ")}
+                        </div>
+                    </div>
+
+                    {/* Select serving section */}
+                    <div className="bg-white sm:bg-gray-100 px-4 py-4 mt-4">
                         <div className="flex items-center justify-between bg-gray-200 rounded-full px-4 py-2">
                             <div>
                                 <button
@@ -246,7 +225,43 @@ function Recipe() {
                                 +
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div>
 
+            <div className="flex flex-col space-y-4 px-4 bg-white pb-4">
+                {/* ingredients and Method selection */}
+                <div className="flex justify-center">
+                    <div className="flex justify-evenly bg-gray-200 rounded-full w-full sm:w-1/2 sm:mt-4">
+                        <Button
+                            variant={
+                                selectedTab === "Ingredients"
+                                    ? "secondary"
+                                    : "transparent"
+                            }
+                            size="md"
+                            className="w-full"
+                            onClick={() => setSelectedTab("Ingredients")}
+                        >
+                            Ingredients
+                        </Button>
+                        <Button
+                            variant={
+                                selectedTab === "Method"
+                                    ? "secondary"
+                                    : "transparent"
+                            }
+                            size="md"
+                            className="w-full"
+                            onClick={() => setSelectedTab("Method")}
+                        >
+                            Method
+                        </Button>
+                    </div>
+                </div>
+
+                {selectedTab === "Ingredients" ? (
+                    <>
                         {/* Render each ingredient with selection toggle */}
                         {ingredientCards?.map((ingredient, index) => (
                             <div
@@ -272,16 +287,18 @@ function Recipe() {
             </div>
 
             {/* Button to add selected ingredients to shopping list with total cost display */}
-            <Button
-                variant="secondary"
-                size="md"
-                className="flex items-center space-x-4 mx-8 py-2 justify-center"
-            >
-                <div>Add to my shop</div>
-                <div className=" text-white/60">
-                    Total ${data.totalAmount.toFixed(2)}
-                </div>
-            </Button>
+            <div className="flex justify-center">
+                <Button
+                    variant="secondary"
+                    size="md"
+                    className="flex items-center space-x-4 mx-8 py-2 justify-center mt-4 w-full sm:w-1/2"
+                >
+                    <div>Add to my shop</div>
+                    <div className=" text-white/60">
+                        Total ${data.totalAmount.toFixed(2)}
+                    </div>
+                </Button>
+            </div>
         </div>
     );
 }
