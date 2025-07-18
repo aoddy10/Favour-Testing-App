@@ -5,7 +5,7 @@ import {
     modernProperRecipes,
     selectedModernProperUser,
 } from "@/libs/mockData";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
     setRecipes,
     setFavoriteRecipes,
@@ -17,7 +17,7 @@ import { useState } from "react";
 // import components
 import SearchBox from "@/components/SearchBox";
 import Button from "@/components/ui/Button";
-import YourFavoriteSection from "@/components/YourFavoriteSection";
+import YourFavoriteSection from "@/components/FavoriteSection";
 import RecipesSection from "@/components/RecipesSection";
 import ModernProperSection from "@/components/ModernProperSection";
 
@@ -27,20 +27,24 @@ function PlanPage() {
     const [selected, setSelected] = useState<ListTypeProps>("Quick Pick");
     const [searchText, setSearchText] = useState("");
 
+    const recipesInStore = useAppSelector((state) => state.recipe.recipes);
     const dispatch = useAppDispatch();
 
+    // Load initial mock data into Redux store on component mount
     useEffect(() => {
-        dispatch(setRecipes(recipes));
-        dispatch(setFavoriteRecipes(favoriteRecipes));
-        dispatch(setModernProperRecipes(modernProperRecipes));
-        dispatch(setSelectedModernProperUser(selectedModernProperUser));
-    }, [dispatch]);
+        if (!recipesInStore.length) {
+            dispatch(setRecipes(recipes));
+            dispatch(setFavoriteRecipes(favoriteRecipes));
+            dispatch(setModernProperRecipes(modernProperRecipes));
+            dispatch(setSelectedModernProperUser(selectedModernProperUser));
+        }
+    }, [dispatch, recipesInStore.length]);
 
     return (
         <div className="flex  flex-col gap-4 p-4">
             <h1 className="text-3xl mt-6">Let's Plan</h1>
 
-            {/* Plan type selection */}
+            {/* Plan type toggle buttons */}
             <div className="flex justify-evenly bg-gray-200 rounded-full">
                 <Button
                     variant={
@@ -64,7 +68,7 @@ function PlanPage() {
                 </Button>
             </div>
 
-            {/* Search box and more button */}
+            {/* Search input and More+ button */}
             <div className="flex gap-3">
                 <div className="flex-1">
                     <SearchBox
@@ -78,10 +82,13 @@ function PlanPage() {
                 </Button>
             </div>
 
+            {/* Your Favorite recipes section */}
             <YourFavoriteSection />
 
+            {/* Recipes section */}
             <RecipesSection />
 
+            {/* The Modern Proper section */}
             <ModernProperSection />
         </div>
     );

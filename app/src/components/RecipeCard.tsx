@@ -13,16 +13,16 @@ export default function RecipeCard({
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
-    console.log(cardDetail);
-
     const handleCardClick = () => {
+        // set selected recipe to be the selected one in store.
         dispatch(setSelectedRecipe(cardDetail));
+        // navigate to recipe page
         navigate("/recipe");
     };
 
     return (
         <div
-            className="bg-white rounded-xl p-2 space-y-2 min-w-38 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
+            className="bg-white rounded-xl p-2 space-y-2 min-w-38 max-w-56 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
             onClick={handleCardClick}
         >
             <div>
@@ -33,7 +33,13 @@ export default function RecipeCard({
                         className="w-full aspect-square object-cover rounded-lg"
                     />
                     <div className="absolute top-2 right-2 bg-black/50 rounded-md p-1">
-                        <Heart className="w-5 aspect-square" fill="white" />
+                        <Heart
+                            className={`w-5 aspect-square ${
+                                cardDetail.isLike
+                                    ? "text-white fill-white"
+                                    : "text-white fill-transparent"
+                            }`}
+                        />
                     </div>
                 </div>
 

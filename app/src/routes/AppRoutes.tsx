@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 // Importing layout
 import MainLayout from "@/components/layouts/MainLayout";
@@ -10,22 +11,74 @@ import ListPage from "@/features/ListPage";
 import NotFoundPage from "@/features/NotFoundPage";
 import PlanPage from "@/features/PlanPage";
 import ShopPage from "@/features/ShopPage";
-import Recipe from "@/features/Recipe";
+import RecipePage from "@/features/RecipePage";
+import PageWrapper from "@/components/PageWrapper";
 
 export default function AppRoutes() {
+    const location = useLocation();
+
     return (
-        <BrowserRouter>
-            <Routes>
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
                 <Route path="/" element={<MainLayout />}>
-                    <Route index element={<PlanPage />} />
-                    <Route path="/list" element={<ListPage />} />
-                    <Route path="/shop" element={<ShopPage />} />
-                    <Route path="/cook" element={<CookPage />} />
-                    <Route path="/account" element={<AccountPage />} />
-                    <Route path="/recipe" element={<Recipe />} />
-                    <Route path="*" element={<NotFoundPage />} />
+                    <Route
+                        index
+                        element={
+                            <PageWrapper>
+                                <PlanPage />
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="/list"
+                        element={
+                            <PageWrapper>
+                                <ListPage />
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="/shop"
+                        element={
+                            <PageWrapper>
+                                <ShopPage />
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="/cook"
+                        element={
+                            <PageWrapper>
+                                <CookPage />
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="/account"
+                        element={
+                            <PageWrapper>
+                                <AccountPage />
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="/recipe"
+                        element={
+                            <PageWrapper>
+                                <RecipePage />
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="*"
+                        element={
+                            <PageWrapper>
+                                <NotFoundPage />
+                            </PageWrapper>
+                        }
+                    />
                 </Route>
             </Routes>
-        </BrowserRouter>
+        </AnimatePresence>
     );
 }

@@ -1,6 +1,6 @@
 /**
- * Redux slice for managing recipes in the application.
- * Provides actions to set, add, remove, and update recipes in the state.
+ * Redux slice for managing various recipe lists, the selected recipe,
+ * and user interactions such as liking recipes within the application.
  */
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
@@ -11,14 +11,16 @@ interface RecipeState {
     recipes: RecipeCard[];
     favoriteRecipes: RecipeCard[];
     modernProperRecipes: RecipeCard[];
-    selectedModernProperUser?: SelectedModernProper;
-    selectedRecipe?: RecipeCard;
+    selectedModernProperUser?: SelectedModernProper | null;
+    selectedRecipe?: RecipeCard | null;
 }
 
 const initialState: RecipeState = {
     recipes: [],
     favoriteRecipes: [],
     modernProperRecipes: [],
+    selectedModernProperUser: null,
+    selectedRecipe: null,
 };
 
 const recipeSlice = createSlice({
@@ -115,8 +117,58 @@ const recipeSlice = createSlice({
         },
 
         // Set the selected recipe for viewing details.
-        setSelectedRecipe(state, action: PayloadAction<RecipeCard>) {
+        setSelectedRecipe(state, action: PayloadAction<RecipeCard | null>) {
             state.selectedRecipe = action.payload;
+        },
+
+        // Toggle the isLike property of a recipe across all recipe lists and the selected recipe by its ID.
+        toggleLikeRecipe(state, action: PayloadAction<string>) {
+            // Update recipes list
+            const recipeIndex = state.recipes.findIndex(
+                (recipe) => recipe.recipe.id === action.payload
+            );
+            if (recipeIndex !== -1) {
+                const newRecipes = [...state.recipes];
+                newRecipes[recipeIndex] = {
+                    ...newRecipes[recipeIndex],
+                    isLike: !newRecipes[recipeIndex].isLike,
+                };
+                state.recipes = newRecipes;
+            }
+
+            // Update favorite recipes list
+            const favoriteIndex = state.favoriteRecipes.findIndex(
+                (recipe) => recipe.recipe.id === action.payload
+            );
+            if (favoriteIndex !== -1) {
+                const newFavoriteRecipe = [...state.favoriteRecipes];
+                newFavoriteRecipe[favoriteIndex] = {
+                    ...newFavoriteRecipe[favoriteIndex],
+                    isLike: !newFavoriteRecipe[favoriteIndex].isLike,
+                };
+                state.favoriteRecipes = newFavoriteRecipe;
+            }
+
+            // Update modern proper recipes list
+            const modernProperIndex = state.modernProperRecipes.findIndex(
+                (recipe) => recipe.recipe.id === action.payload
+            );
+            if (modernProperIndex !== -1) {
+                const newModernProperRecipes = [...state.modernProperRecipes];
+                newModernProperRecipes[modernProperIndex] = {
+                    ...newModernProperRecipes[modernProperIndex],
+                    isLike: !newModernProperRecipes[modernProperIndex].isLike,
+                };
+                state.modernProperRecipes = newModernProperRecipes;
+            }
+
+            // Update selected recipe
+            if (
+                state.selectedRecipe &&
+                state.selectedRecipe.recipe.id === action.payload
+            ) {
+                state.selectedRecipe.isLike = !state.selectedRecipe.isLike;
+            }
         },
     },
 });
@@ -136,6 +188,7 @@ export const {
     updateModernProperRecipe,
     setSelectedModernProperUser,
     setSelectedRecipe,
+    toggleLikeRecipe,
 } = recipeSlice.actions;
 
 export default recipeSlice.reducer;

@@ -39,10 +39,11 @@ export const favoriteRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
     {
         recipe: {
-            id: "2",
+            id: "4",
             title: "Spaghetti Carbonara",
             image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
             listName: "Italian Classics",
@@ -62,10 +63,11 @@ export const favoriteRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: true,
+        isLike: true,
     },
     {
         recipe: {
-            id: "3",
+            id: "5",
             title: "Spaghetti Carbonara",
             image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
             listName: "Italian Classics",
@@ -85,6 +87,7 @@ export const favoriteRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: true,
+        isLike: true,
     },
 ];
 
@@ -111,6 +114,7 @@ export const recipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
     {
         recipe: {
@@ -134,6 +138,7 @@ export const recipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: true,
     },
     {
         recipe: {
@@ -157,58 +162,85 @@ export const recipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
+    },
+    {
+        recipe: {
+            id: "4",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+            prepTime: 15,
+            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
+            ingredients: [
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+            ],
+            cookingMethod:
+                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
+        },
+        inShop: false,
+        isLike: true,
+    },
+    {
+        recipe: {
+            id: "5",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+            prepTime: 15,
+            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
+            ingredients: [
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+            ],
+            cookingMethod:
+                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
+        },
+        inShop: false,
+        isLike: true,
+    },
+    {
+        recipe: {
+            id: "6",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+            prepTime: 15,
+            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
+            ingredients: [
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+            ],
+            cookingMethod:
+                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
+        },
+        inShop: false,
+        isLike: false,
     },
 ];
 
 export const modernProperRecipes: RecipeCardProps[] = [
     {
         recipe: {
-            id: "1",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-            prepTime: 15,
-            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
-            ingredients: [
-                mockIngredient,
-                mockIngredient,
-                mockIngredient,
-                mockIngredient,
-            ],
-            cookingMethod:
-                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
-            id: "2",
-            title: "Spaghetti Carbonara",
-            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
-            listName: "Italian Classics",
-            ownerAvatar:
-                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
-            duration: 30,
-            price: 12.99,
-            prepTime: 15,
-            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
-            ingredients: [
-                mockIngredient,
-                mockIngredient,
-                mockIngredient,
-                mockIngredient,
-            ],
-            cookingMethod:
-                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
-        },
-        inShop: false,
-    },
-    {
-        recipe: {
             id: "3",
             title: "Spaghetti Carbonara",
             image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
@@ -229,6 +261,55 @@ export const modernProperRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
+    },
+    {
+        recipe: {
+            id: "5",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+            prepTime: 15,
+            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
+            ingredients: [
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+            ],
+            cookingMethod:
+                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
+        },
+        inShop: false,
+        isLike: true,
+    },
+    {
+        recipe: {
+            id: "6",
+            title: "Spaghetti Carbonara",
+            image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700,636",
+            listName: "Italian Classics",
+            ownerAvatar:
+                "https://img.freepik.com/free-photo/selfie-portrait-videocall_23-2149186122.jpg?semt=ais_items_boosted&w=740",
+            duration: 30,
+            price: 12.99,
+            prepTime: 15,
+            features: ["Kid Friendly", "Gluten Free", "Low Carb"],
+            ingredients: [
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+                mockIngredient,
+            ],
+            cookingMethod:
+                "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
+        },
+        inShop: false,
+        isLike: false,
     },
 ];
 

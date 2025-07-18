@@ -2,6 +2,7 @@ import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
 
 function YourFavoriteSection() {
+    // Render favorite recipes from the Redux store
     const favoriteRecipes = useAppSelector(
         (state) => state.recipe.favoriteRecipes
     );
