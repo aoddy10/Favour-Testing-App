@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
+import NoDataFoundBox from "./NoDataFoundBox";
 
 function RecipesSection() {
     const recipeCards = useAppSelector((state) => state.recipe.recipes);
@@ -23,9 +24,7 @@ function RecipesSection() {
                     ))}
                 </div>
             ) : (
-                <div className="text-center text-gray-500">
-                    No favorite recipes found.
-                </div>
+                <NoDataFoundBox message="No recipes found." />
             )}
         </div>
     );

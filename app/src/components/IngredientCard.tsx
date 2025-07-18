@@ -1,3 +1,4 @@
+import React from "react";
 import type { IngredientCard as IngredientCardProps } from "@/types/recipe";
 import { Check } from "lucide-react";
 
@@ -17,6 +18,7 @@ function IngredientCard({
             {ingredient.detail.imageUrl ? (
                 <img
                     src={ingredient.detail.imageUrl}
+                    loading="lazy"
                     alt="Ingredient Image"
                     className=" w-18 object-contain rounded-full sm:w-28"
                 />
@@ -58,4 +60,4 @@ function IngredientCard({
     );
 }
 
-export default IngredientCard;
+export default React.memo(IngredientCard);

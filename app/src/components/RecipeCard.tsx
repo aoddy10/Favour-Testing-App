@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { setSelectedRecipe } from "@/store/recipeSlice";
 import { useNavigate } from "react-router-dom";
@@ -5,11 +6,7 @@ import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
 import { Heart, Clock4, UserRound } from "lucide-react";
 
-export default function RecipeCard({
-    cardDetail,
-}: {
-    cardDetail: RecipeCardProps;
-}) {
+const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -29,6 +26,7 @@ export default function RecipeCard({
                 <div className="relative">
                     <img
                         src={cardDetail.recipe.image}
+                        loading="lazy"
                         alt={cardDetail.recipe.title}
                         className="w-full aspect-square object-cover rounded-lg"
                     />
@@ -46,6 +44,7 @@ export default function RecipeCard({
                 <div className="flex items-end space-x-2 px-2 -mt-4 sm:-mt-6">
                     <img
                         src={cardDetail.recipe.ownerAvatar}
+                        loading="lazy"
                         alt="Owner"
                         className=" h-12 aspect-square rounded-full object-cover z-50 border-2 border-white sm:h-16"
                     />
@@ -82,4 +81,6 @@ export default function RecipeCard({
             </div>
         </div>
     );
-}
+};
+
+export default React.memo(RecipeCard);
