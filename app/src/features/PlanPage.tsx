@@ -37,7 +37,7 @@ function PlanPage() {
     }, [dispatch]);
 
     return (
-        <div className="flex  flex-col gap-4">
+        <div className="flex  flex-col gap-4 p-4">
             <h1 className="text-3xl mt-6">Let's Plan</h1>
 
             {/* Plan type selection */}
