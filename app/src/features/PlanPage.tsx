@@ -62,11 +62,11 @@ function PlanPage() {
     }, []);
 
     return (
-        <div className="flex  flex-col gap-4 p-4">
+        <div className="flex  flex-col gap-4 px-4 pb-20">
             <h1 className="text-3xl mt-6">Let's Plan</h1>
 
             {/* Plan type toggle buttons */}
-            <div className="flex justify-evenly bg-gray-200 rounded-full">
+            <div className="flex justify-evenly bg-gray-200 rounded-full sm:w-1/3">
                 <Button
                     variant={
                         selected === "Quick Pick" ? "secondary" : "transparent"
@@ -90,7 +90,7 @@ function PlanPage() {
             </div>
 
             {/* Search box and More+ button */}
-            <div className="flex gap-3">
+            <div className="flex gap-3 sm:w-1/3">
                 <div className="flex-1">
                     <SearchBox
                         placeholder="Search Ingredients, Recipes"

@@ -22,7 +22,7 @@ export default function RecipeCard({
 
     return (
         <div
-            className="bg-white rounded-xl p-2 space-y-2 min-w-38 max-w-56 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
+            className="bg-white rounded-xl p-2 space-y-2 min-w-38 sm:w-56 sm:min-w-56 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
             onClick={handleCardClick}
         >
             <div>
@@ -43,13 +43,13 @@ export default function RecipeCard({
                     </div>
                 </div>
 
-                <div className="flex items-end space-x-2 px-2 -mt-4">
+                <div className="flex items-end space-x-2 px-2 -mt-4 sm:-mt-6">
                     <img
                         src={cardDetail.recipe.ownerAvatar}
                         alt="Owner"
-                        className=" h-12 aspect-square rounded-full object-cover z-50 border-2 border-white"
+                        className=" h-12 aspect-square rounded-full object-cover z-50 border-2 border-white sm:h-16"
                     />
-                    <span className=" text-[6pt] text-gray-500 mb-2">
+                    <span className=" text-[8pt] text-gray-500 mb-2 sm:text-sm line-clamp-1 sm:mb-2">
                         {cardDetail.recipe.listName}
                     </span>
                 </div>

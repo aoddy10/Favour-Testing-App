@@ -18,7 +18,7 @@ function IngredientCard({
                 <img
                     src={ingredient.detail.imageUrl}
                     alt="Ingredient Image"
-                    className=" w-18 object-contain rounded-full"
+                    className=" w-18 object-contain rounded-full sm:w-28"
                 />
             ) : (
                 <div className="w-18 bg-gray-200 rounded-full flex items-center justify-center">
@@ -30,10 +30,10 @@ function IngredientCard({
                 <div className="flex items-start justify-between space-x-2">
                     <div className="flex flex-col">
                         <h2 className="">{ingredient.detail.title}</h2>
-                        <p className="text-sm text-gray-500 line-clamp-1">
+                        <p className="text-sm text-gray-500 line-clamp-1 sm:line-clamp-2">
                             {ingredient.detail.subtitle}
                         </p>
-                        <p className="text-xs text-gray-400 line-clamp-1">
+                        <p className="text-xs text-gray-400 line-clamp-1 sm:line-clamp-3">
                             {ingredient.detail.description}
                         </p>
                     </div>

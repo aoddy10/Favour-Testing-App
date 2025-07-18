@@ -18,7 +18,7 @@ function ModernProperSection() {
                         <img
                             src={selectedModernProperUser?.avatarUrl}
                             alt="Modern Proper Logo"
-                            className="w-10 aspect-square rounded-full mr-2 object-cover"
+                            className="w-12 aspect-square rounded-full mr-2 object-cover sm:w-16"
                         />
                     ) : (
                         <div className="w-10 aspect-square rounded-full bg-gray-200 mr-2" />
