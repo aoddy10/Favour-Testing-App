@@ -22,7 +22,7 @@ export default function RecipeCard({
 
     return (
         <div
-            className="bg-white rounded-xl p-2 space-y-2 min-w-38 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
+            className="bg-white rounded-xl p-2 space-y-2 min-w-38 max-w-56 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
             onClick={handleCardClick}
         >
             <div>

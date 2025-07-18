@@ -11,7 +11,7 @@ import ListPage from "@/features/ListPage";
 import NotFoundPage from "@/features/NotFoundPage";
 import PlanPage from "@/features/PlanPage";
 import ShopPage from "@/features/ShopPage";
-import Recipe from "@/features/Recipe";
+import RecipePage from "@/features/RecipePage";
 import PageWrapper from "@/components/PageWrapper";
 
 export default function AppRoutes() {
@@ -65,7 +65,7 @@ export default function AppRoutes() {
                         path="/recipe"
                         element={
                             <PageWrapper>
-                                <Recipe />
+                                <RecipePage />
                             </PageWrapper>
                         }
                     />

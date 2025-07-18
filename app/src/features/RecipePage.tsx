@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/store/hooks";
-import { setSelectedRecipe } from "@/store/recipeSlice";
+import { toggleLikeRecipe } from "@/store/recipeSlice";
 import Button from "@/components/ui/Button";
 
 import { ArrowLeft, Heart, Send, Clock4, CookingPot } from "lucide-react";
@@ -34,6 +34,7 @@ function Recipe() {
         costPerServing: 0,
     });
 
+    // Initialize totalAmount and costPerServing based on selectedRecipe ingredients
     useEffect(() => {
         const initialTotalAmount =
             selectedRecipe?.recipe.ingredients?.reduce(
@@ -57,6 +58,7 @@ function Recipe() {
         })) || []
     );
 
+    // Toggle selection of an ingredient and recalculate costs
     const handleToggleSelected = (index: number) => {
         setIngredientCards((prevCards) => {
             const updatedCards = prevCards.map((card, i) =>
@@ -70,7 +72,7 @@ function Recipe() {
         });
     };
 
-    // Helper to recalculate total and cost per serving
+    // Recalculate totalAmount and costPerServing based on selected ingredients
     const recalculateCosts = (cards?: IngredientCardProps[]) => {
         const currentCards = cards || ingredientCards;
         const total = currentCards
@@ -83,11 +85,19 @@ function Recipe() {
         }));
     };
 
+    // Handler to toggle like status of the recipe
+    const handleToggleLike = () => {
+        if (selectedRecipe) {
+            dispatch(toggleLikeRecipe(selectedRecipe.recipe.id));
+        }
+    };
+
     // TODO: make it better display when no recipe is selected
     if (!selectedRecipe) {
         return <div>No recipe selected.</div>;
     }
 
+    // Handle increment/decrement of servings and update costPerServing
     const handleServingsChange = (change: number) => {
         setData((prev) => {
             const newServings = Math.max(1, prev.servings + change);
@@ -99,11 +109,9 @@ function Recipe() {
         });
     };
 
+    // Navigate back to home path
     const handleBackButtonClick = () => {
         navigate(-1);
-        setTimeout(() => {
-            dispatch(setSelectedRecipe(null));
-        }, 300);
     };
 
     return (
@@ -114,7 +122,15 @@ function Recipe() {
                         <ArrowLeft className="cursor-pointer" />
                     </button>
                     <div className="flex justify-end space-x-4">
-                        <Heart className="inline cursor-pointer" />
+                        <button onClick={handleToggleLike}>
+                            <Heart
+                                className={`inline cursor-pointer ${
+                                    selectedRecipe.isLike
+                                        ? "text-black fill-black"
+                                        : "text-gray-300 fill-transparent"
+                                }`}
+                            />
+                        </button>
                         <Send className="inline cursor-pointer" />
                     </div>
                 </div>
@@ -231,6 +247,7 @@ function Recipe() {
                             </button>
                         </div>
 
+                        {/* Render each ingredient with selection toggle */}
                         {ingredientCards?.map((ingredient, index) => (
                             <div
                                 key={`ingredient-${index}`}
@@ -246,6 +263,7 @@ function Recipe() {
                         ))}
                     </>
                 ) : (
+                    // Render cooking method instructions if Method tab is selected
                     <div className="p-2 min-h-60 text-gray-600">
                         {selectedRecipe.recipe.cookingMethod &&
                             selectedRecipe.recipe.cookingMethod}
@@ -253,6 +271,7 @@ function Recipe() {
                 )}
             </div>
 
+            {/* Button to add selected ingredients to shopping list with total cost display */}
             <Button
                 variant="secondary"
                 size="md"
