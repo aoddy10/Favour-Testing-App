@@ -5,9 +5,15 @@ import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
 import { Heart, Clock4, UserRound } from "lucide-react";
 
-export default function RecipeCard(cardDetail: RecipeCardProps) {
+export default function RecipeCard({
+    cardDetail,
+}: {
+    cardDetail: RecipeCardProps;
+}) {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    console.log(cardDetail);
 
     const handleCardClick = () => {
         dispatch(setSelectedRecipe(cardDetail));
@@ -44,7 +50,7 @@ export default function RecipeCard(cardDetail: RecipeCardProps) {
             </div>
 
             <div className="flex flex-col gap-1 px-2">
-                <h2 className="text-sm text-gray-500">
+                <h2 className="font-serif text-purple-900">
                     {cardDetail.recipe.title}
                 </h2>
 

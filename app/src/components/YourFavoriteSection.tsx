@@ -20,8 +20,7 @@ function YourFavoriteSection() {
                     {favoriteRecipes.map((recipeCard) => (
                         <RecipeCard
                             key={recipeCard.recipe.id}
-                            recipe={recipeCard.recipe}
-                            inShop={false} // Placeholder; adjust if necessary
+                            cardDetail={recipeCard}
                         />
                     ))}
                 </div>
