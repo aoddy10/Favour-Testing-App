@@ -1,10 +1,4 @@
 import { useEffect } from "react";
-import {
-    recipes,
-    favoriteRecipes,
-    modernProperRecipes,
-    selectedModernProperUser,
-} from "@/libs/mockData";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
     setRecipes,
@@ -13,6 +7,11 @@ import {
     setSelectedModernProperUser,
 } from "@/store/recipeSlice";
 import { useState } from "react";
+import {
+    fetchRecipes,
+    fetchFavoriteRecipes,
+    fetchModernProperRecipes,
+} from "@/api/recipeService";
 
 // import components
 import SearchBox from "@/components/SearchBox";
@@ -24,21 +23,43 @@ import ModernProperSection from "@/components/ModernProperSection";
 type ListTypeProps = "Quick Pick" | "All Recipes";
 
 function PlanPage() {
+    // Local state to manage selected plan type (Quick Pick or All Recipes)
     const [selected, setSelected] = useState<ListTypeProps>("Quick Pick");
+    // Local state to track the search text input
     const [searchText, setSearchText] = useState("");
 
-    const recipesInStore = useAppSelector((state) => state.recipe.recipes);
     const dispatch = useAppDispatch();
+    const recipesInStore = useAppSelector((state) => state.recipe.recipes);
 
-    // Load initial mock data into Redux store on component mount
-    useEffect(() => {
-        if (!recipesInStore.length) {
-            dispatch(setRecipes(recipes));
-            dispatch(setFavoriteRecipes(favoriteRecipes));
-            dispatch(setModernProperRecipes(modernProperRecipes));
-            dispatch(setSelectedModernProperUser(selectedModernProperUser));
+    // Load data from backend only if recipes are not already loaded in Redux store
+    const loadData = async () => {
+        // Temporary check this as do not need to load data again
+        // As we did't update backend data yet, but need to test state updated
+        if (recipesInStore.length === 0) {
+            const [recipesData, favoriteRecipesData, modernProperResponse] =
+                await Promise.all([
+                    fetchRecipes(),
+                    fetchFavoriteRecipes(),
+                    fetchModernProperRecipes(),
+                ]);
+
+            dispatch(setRecipes(recipesData));
+            dispatch(setFavoriteRecipes(favoriteRecipesData));
+            dispatch(
+                setModernProperRecipes(modernProperResponse.modernProperRecipes)
+            );
+            dispatch(
+                setSelectedModernProperUser(
+                    modernProperResponse.selectedModernProperUser
+                )
+            );
         }
-    }, [dispatch, recipesInStore.length]);
+    };
+
+    // useEffect to trigger initial data loading when the component mounts
+    useEffect(() => {
+        loadData();
+    }, []);
 
     return (
         <div className="flex  flex-col gap-4 p-4">
@@ -68,7 +89,7 @@ function PlanPage() {
                 </Button>
             </div>
 
-            {/* Search input and More+ button */}
+            {/* Search box and More+ button */}
             <div className="flex gap-3">
                 <div className="flex-1">
                     <SearchBox
@@ -82,13 +103,13 @@ function PlanPage() {
                 </Button>
             </div>
 
-            {/* Your Favorite recipes section */}
+            {/* Render Your Favorite recipes section */}
             <YourFavoriteSection />
 
-            {/* Recipes section */}
+            {/* Render general Recipes section */}
             <RecipesSection />
 
-            {/* The Modern Proper section */}
+            {/* Render The Modern Proper section */}
             <ModernProperSection />
         </div>
     );

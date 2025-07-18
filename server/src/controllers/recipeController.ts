@@ -3,6 +3,7 @@ import {
     recipes,
     favoriteRecipes,
     modernProperRecipes,
+    selectedModernProperUser,
 } from "../data/mockData";
 
 // Get recipes and filter by query type
@@ -31,7 +32,10 @@ export const getRecipes = (req: Request, res: Response) => {
     if (type === "favorites") {
         return res.json(favoriteRecipes);
     } else if (type === "modern-proper") {
-        return res.json(modernProperRecipes);
+        return res.json({
+            modernProperRecipes,
+            selectedModernProperUser,
+        });
     } else if (type) {
         // If 'type' is provided but not valid, return a 400 error
         return res.status(400).json({

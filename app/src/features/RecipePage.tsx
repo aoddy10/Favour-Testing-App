@@ -111,7 +111,7 @@ function Recipe() {
 
     // Navigate back to home path
     const handleBackButtonClick = () => {
-        navigate(-1);
+        navigate("/");
     };
 
     return (
