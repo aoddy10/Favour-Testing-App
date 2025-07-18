@@ -13,6 +13,7 @@ import recipeRoutes from "./routes/recipeRoutes";
 dotenv.config();
 
 const app = express();
+app.set("etag", false);
 
 // Enable CORS for localhost:5173 and any origin
 app.use(
@@ -38,6 +39,10 @@ app.use("/api", recipeRoutes);
 
 // Log every incoming request method and path
 app.use((req, res, next) => {
+    res.setHeader(
+        "Cache-Control",
+        "no-store, no-cache, must-revalidate, private"
+    ); // Use this for API that data will change often.
     console.log(`Request received: ${req.method} ${req.path}`);
     next();
 });
