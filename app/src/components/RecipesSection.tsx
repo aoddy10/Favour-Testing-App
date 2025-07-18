@@ -1,7 +1,9 @@
-import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
+import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
 
-function RecipesSection({ recipes }: { recipes: RecipeCardProps[] }) {
+function RecipesSection() {
+    const recipeCards = useAppSelector((state) => state.recipe.recipes);
+
     return (
         <div className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
@@ -11,13 +13,13 @@ function RecipesSection({ recipes }: { recipes: RecipeCardProps[] }) {
                 </div>
             </div>
 
-            {recipes && recipes.length > 0 ? (
+            {recipeCards && recipeCards.length > 0 ? (
                 <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
-                    {recipes.map((recipe) => (
+                    {recipeCards.map((recipeCard) => (
                         <RecipeCard
-                            key={recipe.recipe.id}
-                            recipe={recipe.recipe}
-                            inShop={recipe.inShop}
+                            key={recipeCard.recipe.id}
+                            recipe={recipeCard.recipe}
+                            inShop={recipeCard.inShop}
                         />
                     ))}
                 </div>
