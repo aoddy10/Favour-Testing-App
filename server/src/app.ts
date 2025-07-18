@@ -4,6 +4,8 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 
+import { verifyApiToken } from "./middlewares/verifyApiToken";
+
 // Import route modules
 import recipeRoutes from "./routes/recipeRoutes";
 
@@ -12,10 +14,13 @@ dotenv.config();
 
 const app = express();
 
-// Enable CORS for all origins
+// Enable CORS for localhost:5173 and any origin
 app.use(
     cors({
-        origin: "*",
+        origin: [
+            "http://localhost:5173",
+            // "*", // user only when need to test from all address
+        ],
     })
 );
 
@@ -24,6 +29,9 @@ app.use(morgan("dev"));
 
 // Parse incoming JSON request bodies
 app.use(express.json());
+
+// verify api key
+app.use(verifyApiToken);
 
 // Register recipe-related routes under /api path
 app.use("/api", recipeRoutes);
