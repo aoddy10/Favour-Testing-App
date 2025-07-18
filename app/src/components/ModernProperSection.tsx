@@ -18,6 +18,7 @@ function ModernProperSection() {
                     selectedModernProperUser.avatarUrl ? (
                         <img
                             src={selectedModernProperUser?.avatarUrl}
+                            loading="lazy"
                             alt="Modern Proper Logo"
                             className="w-12 aspect-square rounded-full mr-2 object-cover sm:w-16"
                         />

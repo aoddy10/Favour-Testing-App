@@ -144,6 +144,7 @@ function Recipe() {
                         <div className="relative">
                             <img
                                 src={selectedRecipe.recipe.image}
+                                loading="lazy"
                                 alt={selectedRecipe.recipe.title}
                                 className="w-full aspect-square object-cover rounded-2xl"
                             />
@@ -152,6 +153,7 @@ function Recipe() {
                         <div className="flex items-end space-x-4 px-4 -mt-12">
                             <img
                                 src={selectedRecipe.recipe.ownerAvatar}
+                                loading="lazy"
                                 alt="Owner"
                                 className="w-24 aspect-square rounded-full object-cover border-6 border-white z-50"
                             />

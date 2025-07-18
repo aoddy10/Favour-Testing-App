@@ -18,6 +18,7 @@ function IngredientCard({
             {ingredient.detail.imageUrl ? (
                 <img
                     src={ingredient.detail.imageUrl}
+                    loading="lazy"
                     alt="Ingredient Image"
                     className=" w-18 object-contain rounded-full sm:w-28"
                 />

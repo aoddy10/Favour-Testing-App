@@ -26,6 +26,7 @@ const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
                 <div className="relative">
                     <img
                         src={cardDetail.recipe.image}
+                        loading="lazy"
                         alt={cardDetail.recipe.title}
                         className="w-full aspect-square object-cover rounded-lg"
                     />
@@ -43,6 +44,7 @@ const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
                 <div className="flex items-end space-x-2 px-2 -mt-4 sm:-mt-6">
                     <img
                         src={cardDetail.recipe.ownerAvatar}
+                        loading="lazy"
                         alt="Owner"
                         className=" h-12 aspect-square rounded-full object-cover z-50 border-2 border-white sm:h-16"
                     />
