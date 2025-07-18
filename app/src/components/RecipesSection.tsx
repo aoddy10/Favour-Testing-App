@@ -18,8 +18,7 @@ function RecipesSection() {
                     {recipeCards.map((recipeCard) => (
                         <RecipeCard
                             key={recipeCard.recipe.id}
-                            recipe={recipeCard.recipe}
-                            inShop={recipeCard.inShop}
+                            cardDetail={recipeCard}
                         />
                     ))}
                 </div>

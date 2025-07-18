@@ -125,7 +125,7 @@ function Recipe() {
                     </div>
                 </div>
 
-                <h1 className="text-3xl font-bold text-gray-400">
+                <h1 className="text-4xl text-purple-900 font-serif">
                     {selectedRecipe.recipe.title}
                 </h1>
 
