@@ -1,3 +1,4 @@
+import React from "react";
 import type { IngredientCard as IngredientCardProps } from "@/types/recipe";
 import { Check } from "lucide-react";
 
@@ -58,4 +59,4 @@ function IngredientCard({
     );
 }
 
-export default IngredientCard;
+export default React.memo(IngredientCard);

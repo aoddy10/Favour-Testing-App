@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppDispatch } from "@/store/hooks";
 import { setSelectedRecipe } from "@/store/recipeSlice";
 import { useNavigate } from "react-router-dom";
@@ -5,11 +6,7 @@ import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
 import { Heart, Clock4, UserRound } from "lucide-react";
 
-export default function RecipeCard({
-    cardDetail,
-}: {
-    cardDetail: RecipeCardProps;
-}) {
+const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -82,4 +79,6 @@ export default function RecipeCard({
             </div>
         </div>
     );
-}
+};
+
+export default React.memo(RecipeCard);
