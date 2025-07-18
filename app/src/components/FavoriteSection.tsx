@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
+import NoDataFoundBox from "./NoDataFoundBox";
 
 function YourFavoriteSection() {
     // Render favorite recipes from the Redux store
@@ -26,9 +27,7 @@ function YourFavoriteSection() {
                     ))}
                 </div>
             ) : (
-                <div className="text-center text-gray-500">
-                    No favorite recipes found.
-                </div>
+                <NoDataFoundBox message="No favorite recipes found." />
             )}
         </div>
     );

@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
+import NoDataFoundBox from "./NoDataFoundBox";
 
 function ModernProperSection() {
     const selectedModernProperUser = useAppSelector(
@@ -40,9 +41,7 @@ function ModernProperSection() {
                     ))}
                 </div>
             ) : (
-                <div className="text-center text-gray-500">
-                    No favorite recipes found.
-                </div>
+                <NoDataFoundBox message="No modern proper recipes found." />
             )}
         </div>
     );

@@ -1,18 +1,20 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import { lazy, Suspense } from "react";
 
 // Importing layout
 import MainLayout from "@/components/layouts/MainLayout";
 
-// Importing feature pages
-import AccountPage from "@/features/AccountPage";
-import CookPage from "@/features/CookPage";
-import ListPage from "@/features/ListPage";
-import NotFoundPage from "@/features/NotFoundPage";
-import PlanPage from "@/features/PlanPage";
-import ShopPage from "@/features/ShopPage";
-import RecipePage from "@/features/RecipePage";
+// Lazy loading feature pages
+const AccountPage = lazy(() => import("@/features/AccountPage"));
+const CookPage = lazy(() => import("@/features/CookPage"));
+const ListPage = lazy(() => import("@/features/ListPage"));
+const NotFoundPage = lazy(() => import("@/features/NotFoundPage"));
+const PlanPage = lazy(() => import("@/features/PlanPage"));
+const ShopPage = lazy(() => import("@/features/ShopPage"));
+const RecipePage = lazy(() => import("@/features/RecipePage"));
 import PageWrapper from "@/components/PageWrapper";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function AppRoutes() {
     const location = useLocation();
@@ -25,7 +27,9 @@ export default function AppRoutes() {
                         index
                         element={
                             <PageWrapper>
-                                <PlanPage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <PlanPage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
@@ -33,7 +37,9 @@ export default function AppRoutes() {
                         path="/list"
                         element={
                             <PageWrapper>
-                                <ListPage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <ListPage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
@@ -41,7 +47,9 @@ export default function AppRoutes() {
                         path="/shop"
                         element={
                             <PageWrapper>
-                                <ShopPage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <ShopPage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
@@ -49,7 +57,9 @@ export default function AppRoutes() {
                         path="/cook"
                         element={
                             <PageWrapper>
-                                <CookPage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <CookPage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
@@ -57,7 +67,9 @@ export default function AppRoutes() {
                         path="/account"
                         element={
                             <PageWrapper>
-                                <AccountPage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <AccountPage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
@@ -65,7 +77,9 @@ export default function AppRoutes() {
                         path="/recipe"
                         element={
                             <PageWrapper>
-                                <RecipePage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <RecipePage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
@@ -73,7 +87,9 @@ export default function AppRoutes() {
                         path="*"
                         element={
                             <PageWrapper>
-                                <NotFoundPage />
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <NotFoundPage />
+                                </Suspense>
                             </PageWrapper>
                         }
                     />
