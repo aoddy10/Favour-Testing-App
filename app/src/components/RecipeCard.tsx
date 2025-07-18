@@ -33,7 +33,13 @@ export default function RecipeCard({
                         className="w-full aspect-square object-cover rounded-lg"
                     />
                     <div className="absolute top-2 right-2 bg-black/50 rounded-md p-1">
-                        <Heart className="w-5 aspect-square" fill="white" />
+                        <Heart
+                            className={`w-5 aspect-square ${
+                                cardDetail.isLike
+                                    ? "text-white fill-white"
+                                    : "text-white fill-transparent"
+                            }`}
+                        />
                     </div>
                 </div>
 

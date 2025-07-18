@@ -39,6 +39,7 @@ export const favoriteRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
     {
         recipe: {
@@ -62,6 +63,7 @@ export const favoriteRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: true,
+        isLike: true,
     },
     {
         recipe: {
@@ -85,6 +87,7 @@ export const favoriteRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: true,
+        isLike: true,
     },
 ];
 
@@ -111,6 +114,7 @@ export const recipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
     {
         recipe: {
@@ -134,6 +138,7 @@ export const recipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
     {
         recipe: {
@@ -157,6 +162,7 @@ export const recipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
 ];
 
@@ -183,6 +189,7 @@ export const modernProperRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: true,
     },
     {
         recipe: {
@@ -206,6 +213,7 @@ export const modernProperRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
     {
         recipe: {
@@ -229,6 +237,7 @@ export const modernProperRecipes: RecipeCardProps[] = [
                 "Sauté guanciale until golden. Mix hot cooked pasta vigorously with the guanciale, egg, cheese and a splash of pasta cooking water and watch as it transforms into a luxurious, creamy sauce.",
         },
         inShop: false,
+        isLike: false,
     },
 ];
 

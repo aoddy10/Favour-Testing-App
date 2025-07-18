@@ -30,6 +30,7 @@ export type SelectedModernProper = {
 export type RecipeCard = {
     recipe: Recipe;
     inShop: boolean;
+    isLike: boolean;
 };
 
 export type IngredientCard = {
