@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
 import { Heart, Clock4, UserRound } from "lucide-react";
+import LikeIcon from "./LikeIcon";
 
 const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
     const dispatch = useAppDispatch();
@@ -18,11 +19,19 @@ const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
     };
 
     return (
-        <div
-            className="bg-white rounded-xl p-2 space-y-2 min-w-38 sm:w-56 sm:min-w-56 shadow-md shadow-gray-300 shadow-offset cursor-pointer"
-            onClick={handleCardClick}
-        >
-            <div>
+        <div className=" relative bg-white rounded-xl p-2 space-y-2 min-w-38 sm:w-56 sm:min-w-56 shadow-md shadow-gray-300 shadow-offset cursor-pointer">
+            <div
+                className={`absolute z-50 right-4 top-4 bg-black/30 p-1 rounded-md ${
+                    !cardDetail.isLike && "opacity-20"
+                }`}
+            >
+                <LikeIcon
+                    recipeId={cardDetail.recipe.id}
+                    isLike={cardDetail.isLike}
+                />
+            </div>
+
+            <div onClick={handleCardClick}>
                 <div className="relative">
                     <img
                         src={cardDetail.recipe.image}
@@ -30,15 +39,6 @@ const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
                         alt={cardDetail.recipe.title}
                         className="w-full aspect-square object-cover rounded-lg"
                     />
-                    <div className="absolute top-2 right-2 bg-black/50 rounded-md p-1">
-                        <Heart
-                            className={`w-5 aspect-square ${
-                                cardDetail.isLike
-                                    ? "text-white fill-white"
-                                    : "text-white fill-transparent"
-                            }`}
-                        />
-                    </div>
                 </div>
 
                 <div className="flex items-end space-x-2 px-2 -mt-4 sm:-mt-6">
