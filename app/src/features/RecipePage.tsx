@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/store/hooks";
-import { toggleLikeRecipe } from "@/store/recipeSlice";
 import Button from "@/components/ui/Button";
 
-import { ArrowLeft, Heart, Send, Clock4, CookingPot } from "lucide-react";
+import { ArrowLeft, Send, Clock4, CookingPot } from "lucide-react";
 import { useAppSelector } from "@/store/hooks";
 import IngredientCard from "@/components/IngredientCard";
 import type { IngredientCard as IngredientCardProps } from "@/types/recipe";

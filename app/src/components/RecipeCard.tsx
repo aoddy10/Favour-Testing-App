@@ -4,7 +4,7 @@ import { setSelectedRecipe } from "@/store/recipeSlice";
 import { useNavigate } from "react-router-dom";
 import type { RecipeCard as RecipeCardProps } from "@/types/recipe";
 import Button from "./ui/Button";
-import { Heart, Clock4, UserRound } from "lucide-react";
+import { Clock4, UserRound } from "lucide-react";
 import LikeIcon from "./LikeIcon";
 
 const RecipeCard = ({ cardDetail }: { cardDetail: RecipeCardProps }) => {
