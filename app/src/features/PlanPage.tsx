@@ -33,26 +33,32 @@ function PlanPage() {
 
     // Load data from backend only if recipes are not already loaded in Redux store
     const loadData = async () => {
-        // Temporary check this as do not need to load data again
-        // As we did't update backend data yet, but need to test state updated
-        if (recipesInStore.length === 0) {
-            const [recipesData, favoriteRecipesData, modernProperResponse] =
-                await Promise.all([
-                    fetchRecipes(),
-                    fetchFavoriteRecipes(),
-                    fetchModernProperRecipes(),
-                ]);
+        try {
+            // Temporary check this as do not need to load data again
+            // As we did't update backend data yet, but need to test state updated
+            if (recipesInStore.length === 0) {
+                const [recipesData, favoriteRecipesData, modernProperResponse] =
+                    await Promise.all([
+                        fetchRecipes(),
+                        fetchFavoriteRecipes(),
+                        fetchModernProperRecipes(),
+                    ]);
 
-            dispatch(setRecipes(recipesData));
-            dispatch(setFavoriteRecipes(favoriteRecipesData));
-            dispatch(
-                setModernProperRecipes(modernProperResponse.modernProperRecipes)
-            );
-            dispatch(
-                setSelectedModernProperUser(
-                    modernProperResponse.selectedModernProperUser
-                )
-            );
+                dispatch(setRecipes(recipesData));
+                dispatch(setFavoriteRecipes(favoriteRecipesData));
+                dispatch(
+                    setModernProperRecipes(
+                        modernProperResponse.modernProperRecipes
+                    )
+                );
+                dispatch(
+                    setSelectedModernProperUser(
+                        modernProperResponse.selectedModernProperUser
+                    )
+                );
+            }
+        } catch (error) {
+            console.error("Error in PlanPage:", error);
         }
     };
 
