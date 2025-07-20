@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "@/store/hooks";
-import { toggleLikeRecipe } from "@/store/recipeSlice";
 import Button from "@/components/ui/Button";
 
-import { ArrowLeft, Heart, Send, Clock4, CookingPot } from "lucide-react";
+import { ArrowLeft, Send, Clock4, CookingPot } from "lucide-react";
 import { useAppSelector } from "@/store/hooks";
 import IngredientCard from "@/components/IngredientCard";
 import type { IngredientCard as IngredientCardProps } from "@/types/recipe";
+import LikeIcon from "@/components/LikeIcon";
 
 type SelectedTabProps = "Ingredients" | "Method";
 
@@ -26,7 +25,6 @@ function Recipe() {
         (state) => state.recipe.selectedRecipe
     );
 
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     // State to manage servings, total amount, and cost per serving
@@ -87,13 +85,6 @@ function Recipe() {
         }));
     };
 
-    // Toggle like status of the current selected recipe
-    const handleToggleLike = () => {
-        if (selectedRecipe) {
-            dispatch(toggleLikeRecipe(selectedRecipe.recipe.id));
-        }
-    };
-
     // TODO: make it better display when no recipe is selected
     if (!selectedRecipe) {
         return <div>No recipe selected.</div>;
@@ -124,15 +115,10 @@ function Recipe() {
                     <ArrowLeft className="cursor-pointer" />
                 </button>
                 <div className="flex justify-end space-x-4">
-                    <button onClick={handleToggleLike}>
-                        <Heart
-                            className={`inline cursor-pointer ${
-                                selectedRecipe.isLike
-                                    ? "text-black fill-black"
-                                    : "text-gray-300 fill-transparent"
-                            }`}
-                        />
-                    </button>
+                    <LikeIcon
+                        recipeId={selectedRecipe.recipe.id}
+                        isLike={selectedRecipe.isLike}
+                    />
                     <Send className="inline cursor-pointer" />
                 </div>
             </div>

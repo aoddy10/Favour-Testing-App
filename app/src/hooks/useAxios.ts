@@ -11,4 +11,16 @@ const axiosInstance = axios.create({
     },
 });
 
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (!error.response) {
+            // network error or connection lost
+            const errorMessage = encodeURIComponent("Network connection lost");
+            window.location.href = `/error?message=${errorMessage}`;
+        }
+        return Promise.reject(error);
+    }
+);
+
 export default axiosInstance;

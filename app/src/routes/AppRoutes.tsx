@@ -10,6 +10,7 @@ const AccountPage = lazy(() => import("@/features/AccountPage"));
 const CookPage = lazy(() => import("@/features/CookPage"));
 const ListPage = lazy(() => import("@/features/ListPage"));
 const NotFoundPage = lazy(() => import("@/features/NotFoundPage"));
+const ErrorPage = lazy(() => import("@/features/ErrorPage"));
 const PlanPage = lazy(() => import("@/features/PlanPage"));
 const ShopPage = lazy(() => import("@/features/ShopPage"));
 const RecipePage = lazy(() => import("@/features/RecipePage"));
@@ -79,6 +80,16 @@ export default function AppRoutes() {
                             <PageWrapper>
                                 <Suspense fallback={<LoadingScreen />}>
                                     <RecipePage />
+                                </Suspense>
+                            </PageWrapper>
+                        }
+                    />
+                    <Route
+                        path="error"
+                        element={
+                            <PageWrapper>
+                                <Suspense fallback={<LoadingScreen />}>
+                                    <ErrorPage />
                                 </Suspense>
                             </PageWrapper>
                         }
