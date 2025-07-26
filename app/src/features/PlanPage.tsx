@@ -1,17 +1,4 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-    setRecipes,
-    setFavoriteRecipes,
-    setModernProperRecipes,
-    setSelectedModernProperUser,
-} from "@/store/recipeSlice";
 import { useState } from "react";
-import {
-    fetchRecipes,
-    fetchFavoriteRecipes,
-    fetchModernProperRecipes,
-} from "@/api/recipeService";
 
 // import components
 import SearchBox from "@/components/SearchBox";
@@ -27,45 +14,6 @@ function PlanPage() {
     const [selected, setSelected] = useState<ListTypeProps>("Quick Pick");
     // Local state to track the search text input
     const [searchText, setSearchText] = useState("");
-
-    const dispatch = useAppDispatch();
-    const recipesInStore = useAppSelector((state) => state.recipe.recipes);
-
-    // Load data from backend only if recipes are not already loaded in Redux store
-    const loadData = async () => {
-        try {
-            // Temporary check this as do not need to load data again
-            // As we did't update backend data yet, but need to test state updated
-            if (recipesInStore.length === 0) {
-                const [recipesData, favoriteRecipesData, modernProperResponse] =
-                    await Promise.all([
-                        fetchRecipes(),
-                        fetchFavoriteRecipes(),
-                        fetchModernProperRecipes(),
-                    ]);
-
-                dispatch(setRecipes(recipesData));
-                dispatch(setFavoriteRecipes(favoriteRecipesData));
-                dispatch(
-                    setModernProperRecipes(
-                        modernProperResponse.modernProperRecipes
-                    )
-                );
-                dispatch(
-                    setSelectedModernProperUser(
-                        modernProperResponse.selectedModernProperUser
-                    )
-                );
-            }
-        } catch (error) {
-            console.error("Error in PlanPage:", error);
-        }
-    };
-
-    // useEffect to trigger initial data loading when the component mounts
-    useEffect(() => {
-        loadData();
-    }, []);
 
     return (
         <div className="flex  flex-col gap-4 px-4 pb-20">

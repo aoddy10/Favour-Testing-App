@@ -1,9 +1,22 @@
-import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
 import NoDataFoundBox from "./NoDataFoundBox";
+import { useGetRecipesQuery } from "@/api/recipeApi";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/store/hooks";
+import { setRecipes } from "@/store/recipeSlice";
+import { useEffect } from "react";
 
 function RecipesSection() {
-    const recipeCards = useAppSelector((state) => state.recipe.recipes);
+    const { isLoading, isUninitialized, isFetching, isError, data } =
+        useGetRecipesQuery();
+    const recipes = useAppSelector((state) => state.recipe.recipes);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (recipes.length === 0 && data) {
+            dispatch(setRecipes(data));
+        }
+    }, [data, recipes, dispatch]);
 
     return (
         <div className="flex flex-col gap-2">
@@ -14,17 +27,23 @@ function RecipesSection() {
                 </div>
             </div>
 
-            {recipeCards && recipeCards.length > 0 ? (
+            {isLoading ||
+                isUninitialized ||
+                (isFetching && <NoDataFoundBox message="Loading..." />)}
+
+            {isError && (
+                <NoDataFoundBox message="Something went wrong. Please contact admin." />
+            )}
+
+            {recipes.length > 0 && (
                 <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
-                    {recipeCards.map((recipeCard) => (
+                    {recipes.map((recipeCard) => (
                         <RecipeCard
                             key={recipeCard.recipe.id}
                             cardDetail={recipeCard}
                         />
                     ))}
                 </div>
-            ) : (
-                <NoDataFoundBox message="No recipes found." />
             )}
         </div>
     );

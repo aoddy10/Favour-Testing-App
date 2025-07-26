@@ -1,3 +1,4 @@
+import { recipeApi } from "../api/recipeApi";
 import { configureStore } from "@reduxjs/toolkit";
 import recipeReducer from "./recipeSlice";
 
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     recipe: recipeReducer,
+    [recipeApi.reducerPath]: recipeApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -21,7 +23,7 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: false,
-        }),
+        }).concat(recipeApi.middleware),
 });
 
 export const persistor = persistStore(store);

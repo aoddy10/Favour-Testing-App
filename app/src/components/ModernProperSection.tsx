@@ -1,14 +1,33 @@
-import { useAppSelector } from "@/store/hooks";
 import RecipeCard from "@/components/RecipeCard";
 import NoDataFoundBox from "./NoDataFoundBox";
+import { useGetModernProperRecipesQuery } from "@/api/recipeApi";
+import { useAppSelector } from "@/store/hooks";
+import { useDispatch } from "react-redux";
+import {
+    setModernProperRecipes,
+    setSelectedModernProperUser,
+} from "@/store/recipeSlice";
+import { useEffect } from "react";
 
 function ModernProperSection() {
+    const { isLoading, isUninitialized, isFetching, isError, data } =
+        useGetModernProperRecipesQuery();
+    const modernRecipes = useAppSelector(
+        (state) => state.recipe.favoriteRecipes
+    );
     const selectedModernProperUser = useAppSelector(
         (state) => state.recipe.selectedModernProperUser
     );
-    const modernProperRecipes = useAppSelector(
-        (state) => state.recipe.modernProperRecipes
-    );
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (modernRecipes.length === 0 && data) {
+            dispatch(setModernProperRecipes(data.modernProperRecipes));
+            dispatch(
+                setSelectedModernProperUser(data.selectedModernProperUser)
+            );
+        }
+    }, [data, modernRecipes, dispatch]);
 
     return (
         <div className="flex flex-col gap-2">
@@ -32,17 +51,23 @@ function ModernProperSection() {
                 </div>
             </div>
 
-            {modernProperRecipes && modernProperRecipes.length > 0 ? (
+            {isLoading ||
+                isUninitialized ||
+                (isFetching && <NoDataFoundBox message="Loading..." />)}
+
+            {isError && (
+                <NoDataFoundBox message="Something went wrong. Please contact admin." />
+            )}
+
+            {modernRecipes.length > 0 && (
                 <div className="flex gap-3 overflow-x-auto no-scrollbar py-2">
-                    {modernProperRecipes.map((recipeCard) => (
+                    {modernRecipes.map((recipeCard) => (
                         <RecipeCard
                             key={recipeCard.recipe.id}
                             cardDetail={recipeCard}
                         />
                     ))}
                 </div>
-            ) : (
-                <NoDataFoundBox message="No modern proper recipes found." />
             )}
         </div>
     );
